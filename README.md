@@ -4,7 +4,6 @@
 
 <h4 align="left">
     API desenvolvida como trabalho final do módulo Backend-I da GrowDev.
-
     This API was developed as final lesson of Backend-I's module.
 </h4>
 
@@ -17,6 +16,7 @@ Cada usuário pode ter várias mensagens associadas a ele, entretanto cada mensa
 
 This projet aims to implement CRUD operations for messages without data persistence. All the data was stored in a static list. 
 Each user can have multiple messages associated with them, however each message must have only one user linked to it.
+
 ---
 
 ##  👩🏾Quem Faz 
@@ -46,6 +46,9 @@ Done.
 ---
 
 ##  🎯Objetivo do Projeto
+
+Projeto tem o intuito de criar um CRUD de recados com cadastro numa lista estática e sem persistência de dados. 
+Cada usuário pode ter várias mensagens associadas a ele, entretanto cada mensagem só tem um único usuário associado.
 
 The purpose of this project is to implement CRUD operations for messages without data persistence. 
 All data is stored in a static list. Each user can have multiple messages associated with them; 
