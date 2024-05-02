@@ -62,7 +62,7 @@ however, each message should be associated with only one user.
 - [x] Criar uma mensagem / Create a message
 - [x] Obter a lista de mensagens associadas ao usuário / Get all the messages associated to the user.
 - [x] Atualizar uma mensagem puxando pelo ID / Find and update a message using the ID to find it.
-- [ ] - Deletar uma mensagem puxando pelo ID / Find and delete a message using the ID to find it.
+- [x] Deletar uma mensagem puxando pelo ID / Find and delete a message using the ID to find it.
 
 Além das funcionalidades, aqui você pode ver como a API funciona: https://documenter.getpostman.com/view/34357257/2sA3JFBQbv
 
