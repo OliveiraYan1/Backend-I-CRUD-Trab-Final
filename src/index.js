@@ -50,8 +50,19 @@ app.post('/signup', checkUserInput, async (request, response) => {
 
     users.push(newUser);
 
-    response.status(201).send(JSON.stringify({Message: `Seja bem vindo ${name}! Pessoa usuária cadastrada com sucesso`}));
+    const dataUser = {
+        id: newUser.id,
+        name: newUser.name,
+        email: newUser.email,
+    }
+
+    response.status(201).json({
+        success:  true,
+        message: `Seja bem vindo ${name}! Pessoa usuária cadastrada com sucesso`,
+        dataResponse: dataUser
+    })
 })
+
 
 app.post('/login', checkUserInput, async (request, response) => {
     const data = request.body;
@@ -72,9 +83,19 @@ app.post('/login', checkUserInput, async (request, response) => {
             .send(JSON.stringify({Message: "Senha inserida não é válida"}));
     }
 
+    const dataResponse = {
+        id: findUser.id,
+        name: findUser.name,
+        email: findUser.email
+    }
+
     response
         .status(200)
-        .send(JSON.stringify({Message: `Seja bem vindo ${findUser.name}! Pessoa usuária logada com sucesso`}));
+        .json({
+            success: true,
+            message: `Seja bem vindo ${findUser.name}! Pessoa usuária logada com sucesso`,
+            data: dataResponse
+        });
 })
 
 
@@ -101,7 +122,11 @@ app.post('/message', checkMessage, (request, response) => {
 
     response
         .status(200)
-        .send(JSON.stringify({Message: `Mensagem criada com sucesso! ID: ${newMessage.id} | Título: ${newMessage.title} | Descrição: ${newMessage.description}`}));
+        .json({
+            success: true,
+            message: `Mensagem criada com sucesso`,
+            data: newMessage
+        })
 })
 
 app.get('/message/:email', (request, response) => {
@@ -115,12 +140,18 @@ app.get('/message/:email', (request, response) => {
             .send(JSON.stringify({Mensagem: "Email não encontrado, verifique ou crie uma conta."}))
     }
 
-    //TENTAR ADICIONAR MELHOR FORMATAÇÃO COM QUEBRA DE LINHAS
     const userMessageList = user.messages.map((message) => `ID: ${message.id} | Título: ${message.title} | Descrição: ${message.description}`);
+    const dataResponse = {
+        userMessageList
+    }
 
     response
         .status(200)
-        .send(JSON.stringify({Message: `Seja bem vindo! ${userMessageList}`})) 
+        .json({
+            success: true,
+            message: `Seja bem vindo! ${userMessageList}`,
+            data: dataResponse
+        }) 
 })
 
 app.put('/message/:id', checkMessage, (request, response) => {
@@ -143,13 +174,16 @@ app.put('/message/:id', checkMessage, (request, response) => {
         findUser.messages[findIndexMessage].description = data.description;
     }
 
-    const updatedMessage = JSON.stringify(findUser.messages[findIndexMessage]);
-
+    const dataResponse = findUser.messages[findIndexMessage];
 
     response
         .status(200)
-        .send(JSON.stringify({Message: `Mensagem atualizada com sucesso! ${updatedMessage}`}))    
-})
+        .json({
+            success: true,
+            message: `Recado atualizado com sucesso`,
+            data: dataResponse
+        }) 
+}) 
 
 app.delete('/message/:id', (request, response) => {
     const email = request.query.email;
@@ -170,17 +204,21 @@ app.delete('/message/:id', (request, response) => {
             .status(400)
             .send(JSON.stringify({Message: "Mensagem não encontrada, verifique o identificador em nosso banco"}));
     } else{
-        findUser.messages.splice(findIndexMessage, 1);
+       const deletedMessage = findUser.messages.splice(findIndexMessage, 1);
         response
             .status(200)
-            .send(JSON.stringify({Message: "Mensagem apagada com sucesso"}))
+            .json({
+                success: true,
+                message: "Mensagem apagada com sucesso",
+                data: deletedMessage
+            })
 
     }
 
 
 
 })
-
+ 
 
 app.listen(3333, () => console.log("Servidor rodando na porta 3333"));
 

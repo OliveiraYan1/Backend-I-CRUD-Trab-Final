@@ -3,13 +3,13 @@ function checkMessage (request, response, next){
     const title = data.title;
     const description = data.description;
 
-    if (!title){
+    if (!title || title.length < 2){
         response
             .status(400)
             .send(JSON.stringify({Message: "Favor inserir um título"}));
     }
 
-    if (!description){
+    if (!description || description.length < 2){
         response
             .status(400)
             .send(JSON.stringify({Message: "Favor inserir uma descrição"}));
